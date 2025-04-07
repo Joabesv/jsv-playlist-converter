@@ -9,11 +9,21 @@
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "typecheck": "tsc --build"
   },
+  "prettier": "@jsv-pc/prettier-config",
   "dependencies": {
+    "fastify": "catalog:",
     "@fastify/oauth2": "catalog:",
-    "fastify": "catalog:"
+    "@fastify/cors": "catalog:",
+    "@fastify/swagger": "catalog:",
+    "@fastify/swagger-ui": "catalog:",
+    "fastify-type-provider-zod": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "typescript": "catalog:"
+    "@jsv-pc/eslint-config": "workspace:*",
+    "@jsv-pc/prettier-config": "workspace:*",
+    "@jsv-pc/typescript-config": "workspace:*",
+    "typescript": "catalog:",
+    "@types/node": "catalog:"
   }
 }
