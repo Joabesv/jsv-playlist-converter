@@ -49,5 +49,8 @@ export default defineConfig({
     host,
     port,
     strictPort: true,
+  },
+  optimizeDeps: {
+    exclude: ['@jsv-pc/ui']
   }
 })

@@ -1,0 +1,12 @@
+{
+  "extends": "@jsv-pc/typescript-config/internal-package.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "dom", "dom.iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "#/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "src/**/*.vue"],
+  "exclude": ["node_modules"]
+}

@@ -6,21 +6,37 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "pnpm env:run",
+    "env:copy-example": "shx -- cp -n .env.example .env",
+    "env:remove": "shx -- rm -f .env",
+    "env:run": "dotenv -- vite --configLoader runner",
+    "clean": "git clean -xdf .cache dist .turbo node_modules",
+    "format": "prettier --check .  --ignore-path .prettierignore --ignore-path ../../.gitignore",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --build"
   },
   "dependencies": {
     "vue": "^3.5.13",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "@jsv-pc/ui": "workspace:*",
+    "@tailwindcss/vite": "catalog:",
+    "tailwindcss": "catalog:",
+    "dotenv-cli": "catalog:"
   },
   "devDependencies": {
     "@jsv-pc/tailwind-config": "workspace:*",
     "@jsv-pc/typescript-config": "workspace:*",
+    "@jsv-pc/eslint-config": "workspace:*",
+    "@jsv-pc/prettier-config": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@types/node": "catalog:",
+    "shx": "^0.4.0",
     "@vitejs/plugin-vue": "^5.2.1",
-    "tailwindcss": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
+    "eslint": "catalog:",
     "vue-tsc": "^2.2.4"
-  }
+  },
+  "prettier": "@jsv-pc/prettier-config"
 }

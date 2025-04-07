@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
   "tasks": {
     "dev": {
       "dependsOn": ["^dev"],
@@ -34,8 +35,7 @@
       "persistent": true
     },
     "ui-add": {
-      "cache": false,
-      "interactive": true
+      "cache": false
     },
     "env:copy-example": {
       "cache": false

@@ -32,7 +32,7 @@
     "lint": "eslint",
     "postui-add": "prettier src --write --list-different",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "ui-add": "pnpm dlx shadcn-vue@latest add"
+    "ui-add": "pnpm dlx shadcn-vue@2.0.0 add"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
