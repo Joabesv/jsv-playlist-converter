@@ -24,6 +24,7 @@
     "eslint-plugin-import": "catalog:",
     "eslint-plugin-only-warn": "catalog:",
     "eslint-plugin-vue": "catalog:",
+    "eslint-config-turbo": "catalog:",
     "eslint-plugin-turbo": "catalog:",
     "globals": "catalog:",
     "typescript": "catalog:",

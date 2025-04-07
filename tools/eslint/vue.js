@@ -7,20 +7,23 @@ import baseConfig from './base.js';
 import parserVue from 'vue-eslint-parser'
 
 
+
 export default tseslint.config([
   ...baseConfig,
   js.configs.recommended,
   eslintConfigPrettier,
   ...tseslint.configs.recommended,
-  pluginVue.configs.flat.recommended,
+  // @ts-ignore - lib is wrong
+  pluginVue.configs['flat/recommended'],
   {
     languageOptions: {
       parser: parserVue,
       parserOptions: {
         extraFileExtensions: ['.vue'],
         sourceType:'module',
+        parser: tseslint.parser
       },
-      ...pluginVue.configs.flat.recommended.languageOptions,
+      
       globals: {
         ...globals.serviceworker,
         ...globals.browser,
@@ -43,7 +46,8 @@ export default tseslint.config([
   },
   {
     rules: {
-      ...pluginVue.configs.flat.rules,
+      // @ts-ignore - lib is wrong
+      ...pluginVue.configs['flat/recommended'].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}),
       'vue/block-order': ['error', {
         order: ['script', 'template', 'style'],
       }],

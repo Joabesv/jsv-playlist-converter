@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite'
-import taiwindCss from '@tailwindcss/vite'
+import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { z } from 'zod';
 
@@ -17,11 +17,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const envSchema = z.object({
-  /**
-   * Since vite is only used during development, we can assume the structure
-   * will resemble a URL such as: http://localhost:3035.
-   * This will then be used to set the vite dev server's host and port.
-   */
   PUBLIC_WEB_URL:  z.string().url().optional().default('http://localhost:3035'),
   /**
    * Set this if you want to run or deploy your app at a base URL. This is
@@ -37,7 +32,7 @@ const port = parseInt(webUrl.port, 10);
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [taiwindCss(), vue()],
+  plugins: [tailwindcss(), vue()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -1,0 +1,19 @@
+{
+  "name": "@jsv-pc/spotify",
+  "type": "module",
+  "scripts": {
+    "dev": "node --no-warnings --watch --experimental-transform-types src/server.ts",
+    "build": "tsc --noEmit",
+    "clean": "git clean -xdf .cache dist .turbo node_modules",
+    "format": "prettier --check .  --ignore-path .prettierignore --ignore-path ../../.gitignore",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --build"
+  },
+  "dependencies": {
+    "@fastify/oauth2": "catalog:",
+    "fastify": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  }
+}

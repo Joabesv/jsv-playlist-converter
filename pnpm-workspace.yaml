@@ -27,6 +27,9 @@ catalog:
   clsx: ^2.1.1
   '@types/node': ^22.14.0
   zod: ^3.24.2
-  'dotenv-cli': 8.0.0
-ignoredBuiltDependencies:
-  - vue-demi
+  dotenv-cli: ^8.0.0
+  unbuild: ^3.5.0
+  '@fastify/oauth2': ^8.1.2
+  fastify: ^5.2.2
+onlyBuiltDependencies:
+  - esbuild
