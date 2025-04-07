@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "AGPL-3.0-only",
+  "prettier": "@jsv-pc/prettier-config",
+  "devDependencies": {
+    "@jsv-pc/prettier-config": "workspace:*",
+    "prettier": "catalog:",
+    "turbo": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.10.0"
+  },
+  "packageManager": "pnpm@10.6.5",
+  "dependencies": {
+    "@eslint/js": "catalog:"
+  }
+}

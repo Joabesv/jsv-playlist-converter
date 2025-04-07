@@ -1,0 +1,23 @@
+{
+  "name": "@jsv-pc/tailwind-config",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint"
+  },
+  "exports": {
+    "./style.css": "./style.css"
+  },
+  "prettier": "@jsv-pc/prettier-config",
+  "dependencies": {
+    "eslint": "catalog:",
+    "tailwindcss": "catalog:",
+    "tailwindcss-animate": "catalog:"
+  },
+  "devDependencies": {
+    "@jsv-pc/eslint-config": "workspace:*",
+    "@jsv-pc/prettier-config": "workspace:*"
+  }
+}
