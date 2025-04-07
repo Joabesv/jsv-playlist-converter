@@ -1,0 +1,58 @@
+{
+  "name": "@jsv-pc/ui",
+  "license": "MIT",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "imports": {
+    "#*": "./src/*"
+  },
+  "exports": {
+    "./lib/*": {
+      "types": "./dist/src/lib/*.d.ts",
+      "default": "./src/lib/*.ts"
+    },
+    "./components/*": {
+      "types": "./dist/src/components/*.d.ts",
+      "default": "./src/components/*.vue"
+    },
+    "./composables/*": {
+      "types": "./dist/src/composables/*.d.ts",
+      "default": "./src/composables/*.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "postui-add": "prettier src --write --list-different",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "ui-add": "pnpm dlx shadcn-vue@latest add"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "catalog:",
+    "lucide-vue-next": "catalog:",
+    "tailwind-merge": "catalog:",
+    "tw-animate-css": "^1.2.5",
+    "reka-ui": "catalog:"
+  },
+  "devDependencies": {
+    "@jsv-pc/eslint-config": "workspace:*",
+    "@jsv-pc/prettier-config": "workspace:*",
+    "@jsv-pc/tailwind-config": "workspace:*",
+    "@jsv-pc/typescript-config": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.13"
+  },
+  "prettier": "@jsv-pc/prettier-config"
+}
