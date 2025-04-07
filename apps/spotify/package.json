@@ -2,7 +2,7 @@
   "name": "@jsv-pc/spotify",
   "type": "module",
   "scripts": {
-    "dev": "node --no-warnings --watch --experimental-transform-types src/server.ts",
+    "dev": "node --no-warnings --env-file=.env --watch --experimental-transform-types src/server.ts | pino-pretty",
     "build": "tsc --noEmit",
     "clean": "git clean -xdf .cache dist .turbo node_modules",
     "format": "prettier --check .  --ignore-path .prettierignore --ignore-path ../../.gitignore",
@@ -11,19 +11,26 @@
   },
   "prettier": "@jsv-pc/prettier-config",
   "dependencies": {
-    "fastify": "catalog:",
-    "@fastify/oauth2": "catalog:",
+    "@fastify/cookie": "catalog:",
     "@fastify/cors": "catalog:",
+    "@fastify/env": "catalog:",
+    "@fastify/oauth2": "catalog:",
+    "@fastify/session": "catalog:",
     "@fastify/swagger": "catalog:",
     "@fastify/swagger-ui": "catalog:",
+    "fastify": "catalog:",
     "fastify-type-provider-zod": "catalog:",
-    "zod": "catalog:"
+    "ofetch": "catalog:",
+    "zod": "catalog:",
+    "zod-to-json-schema": "catalog:"
   },
   "devDependencies": {
     "@jsv-pc/eslint-config": "workspace:*",
     "@jsv-pc/prettier-config": "workspace:*",
     "@jsv-pc/typescript-config": "workspace:*",
-    "typescript": "catalog:",
-    "@types/node": "catalog:"
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "pino-pretty": "catalog:",
+    "typescript": "catalog:"
   }
 }

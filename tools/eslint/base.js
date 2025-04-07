@@ -31,16 +31,19 @@ export const restrictEnvAccess = tseslint.config(
             'Avoid using process.env directly - validate your types with zod (example in ./apps/server/env.ts)',
         },
       ],
+      'consistent-type-imports': 'error'
     },
   },
 );
+
 
 export default tseslint.config([
   { ignores: ['dist/**'] },
   ...turboConfig,
   js.configs.recommended,
   eslintConfigPrettier,
-  ...tseslint.configs.recommended,
+  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked,
   {
     plugins: {
       turbo: turboPlugin,
@@ -48,6 +51,13 @@ export default tseslint.config([
     rules: {
       'turbo/no-undeclared-env-vars': 'warn',
     },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      }
+    }
   },
   {
     plugins: {
