@@ -2,10 +2,11 @@ import { z } from "zod";
 import { withAuthentication } from "../with-authentication.ts";
 import type { FastifyTypedInstance } from "../../types.ts";
 import { FetchError, ofetch } from "ofetch";
+import { spotifyUserSchema ,type SpotifyUser } from "./types/spotify.ts";
 
 declare module 'fastify' {
   interface FastifyRequest {
-    userinfo: (token: string) => Promise<any>
+    userinfo: (token: string) => Promise<SpotifyUser>
   }
 }
 
@@ -14,10 +15,11 @@ export async function spotifyAuthRoutes(app: FastifyTypedInstance) {
     try {
       const headers = new Headers()
       headers.set('Authorization', `Bearer ${token}`)
-      const response = await ofetch('https://api.spotify.com/v1/me', {
+      const response = await ofetch<SpotifyUser>('https://api.spotify.com/v1/me', {
         headers,
       })
-      return response;
+      const parsedResponse = spotifyUserSchema.parse(response)
+      return parsedResponse;
     } catch (error) {
       if (error instanceof FetchError) {
         this.log.error(error, 'Unknown error fetching spotify api')
@@ -38,6 +40,7 @@ export async function spotifyAuthRoutes(app: FastifyTypedInstance) {
       }, 'constructed URL')
 
       if (request.headers.accept?.includes('application/json')) {
+        this.log.info('Api call')
         return { url: redirectURL.href }
       }
 
@@ -76,11 +79,7 @@ export async function spotifyAuthRoutes(app: FastifyTypedInstance) {
 
       request.session.isAuthenticated = true;
 
-      const profile = await request.userinfo(token.access_token)
-      this.log.info(profile)
-      request.session.userId = profile.id
-
-      this.log.info('Successfully authenticated user with session')
+      await request.session.save();
 
       return reply.redirect('http://localhost:3035/callback')
     } catch(error) {
@@ -116,17 +115,28 @@ export async function spotifyAuthRoutes(app: FastifyTypedInstance) {
   });
 
   app.get('/validate', (request, reply) => {
-    const token = request.session.get('token')
-    request.log.info({ token, host: request.host });
-    return {valid: !!token};
+    return {valid: request.session.isAuthenticated};
   })
 
   app.get('/me', { preHandler: withAuthentication }, async function (request, reply) {
     const token = request.session.get('token')
-    request.log.info(token)
 
-    const profile = await request.userinfo(token.spotifyToken.access_token)
+    if (!token) {
+      return reply.send(401).send({
+        msg: 'Unauthorized'
+      })
+    }
 
-    return profile
+    const profile = await request.userinfo(token.access_token)
+    const user = {
+      login: profile.display_name,
+      providerId: profile.id,
+      email: profile.email,
+      kind: profile.product,
+    }
+
+    request.session.userId = profile.id
+
+    return user
   }) 
 }
