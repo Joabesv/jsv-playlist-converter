@@ -29,7 +29,7 @@ await app.register(env, {
   schema: configJsonSchema
 })
 
-await app.register(cors, { origin: '*' })
+await app.register(cors, { origin: ['http://localhost:3035', 'http://localhost:5005'], credentials: true })
 await app.register(fastifySwagger, {
   openapi: {
     info: {
@@ -77,8 +77,13 @@ await app.register(oauth2, {
     'playlist-read-private',
     'playlist-read-collaborative'
   ],
-  callbackUri: (req) =>
-    `${app.config.PROTOCOL}://${req.host}/api/auth/spotify/callback`,
+  callbackUri: (req) => {
+    const callbackHost = app.config.NODE_ENV === 'production' 
+    ? req.hostname 
+    : req.host
+    
+    return `${app.config.PROTOCOL}://${callbackHost}/api/auth/spotify/callback`
+  },
   pkce: 'S256',
   cookie: {
     secure: app.config.NODE_ENV === 'production',

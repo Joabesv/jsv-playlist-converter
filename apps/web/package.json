@@ -17,25 +17,32 @@
     "typecheck": "tsc --build"
   },
   "dependencies": {
-    "vue": "^3.5.13",
-    "zod": "catalog:",
     "@jsv-pc/ui": "workspace:*",
+    "@kitbag/router": "catalog:",
     "@tailwindcss/vite": "catalog:",
+    "@tanstack/vue-query": "catalog:",
+    "@tanstack/vue-query-devtools": "catalog:",
+    "dotenv-cli": "catalog:",
+    "lucide-vue-next": "catalog:",
+    "ofetch": "catalog:",
+    "pinia": "catalog:",
     "tailwindcss": "catalog:",
-    "dotenv-cli": "catalog:"
+    "vue": "^3.5.13",
+    "vue-router": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@jsv-pc/tailwind-config": "workspace:*",
-    "@jsv-pc/typescript-config": "workspace:*",
     "@jsv-pc/eslint-config": "workspace:*",
     "@jsv-pc/prettier-config": "workspace:*",
+    "@jsv-pc/tailwind-config": "workspace:*",
+    "@jsv-pc/typescript-config": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@types/node": "catalog:",
-    "shx": "^0.4.0",
     "@vitejs/plugin-vue": "^5.2.1",
+    "eslint": "catalog:",
+    "shx": "^0.4.0",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "eslint": "catalog:",
     "vue-tsc": "^2.2.4"
   },
   "prettier": "@jsv-pc/prettier-config"

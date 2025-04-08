@@ -23,6 +23,7 @@ const envSchema = z.object({
    * usually required for deploying a repository to Github/Gitlab pages.
    */
   PUBLIC_BASE_PATH:  z.string().optional().default('/'),
+  BASE_URL: z.string().url().default('http://localhost:5005')
 });
 
 const env = envSchema.parse(process.env);

@@ -27,6 +27,11 @@ export async function authRoutes(app: FastifyTypedInstance) {
   app.get('/logout', async (request, reply) => {
     try {
       await request.session.destroy();
+      
+      if (request.headers.accept?.includes('application/json')) {
+        return reply.send({ success: true });
+      }
+
       return reply.redirect('/')
     } catch(error) {
       app.log.error(error, 'Error during logout')

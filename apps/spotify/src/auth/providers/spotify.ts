@@ -34,8 +34,13 @@ export async function spotifyAuthRoutes(app: FastifyTypedInstance) {
       const params = redirectURL.searchParams
       request.log.info({
         permissions: params.get('scope'),
-        redirect: params.get('redirect_uri')
+        redirect: params.get('redirect_uri'),
       }, 'constructed URL')
+
+      if (request.headers.accept?.includes('application/json')) {
+        return { url: redirectURL.href }
+      }
+
       return reply.redirect(redirectURL.href)
     } catch(error) {
       app.log.error(error, 'Error starting user oauth')
@@ -71,15 +76,16 @@ export async function spotifyAuthRoutes(app: FastifyTypedInstance) {
 
       request.session.isAuthenticated = true;
 
+      const profile = await request.userinfo(token.access_token)
+      this.log.info(profile)
+      request.session.userId = profile.id
 
       this.log.info('Successfully authenticated user with session')
 
-      return reply.send({
-        msg: 'very nice porra'
-      })
+      return reply.redirect('http://localhost:3035/callback')
     } catch(error) {
       this.log.error(error, 'Unknown error')
-      throw error
+      return reply.redirect('http://localhost:3035/error?message=AuthFailed')
     }
 
   })  
@@ -109,12 +115,15 @@ export async function spotifyAuthRoutes(app: FastifyTypedInstance) {
     }
   });
 
+  app.get('/validate', (request, reply) => {
+    const token = request.session.get('token')
+    request.log.info({ token, host: request.host });
+    return {valid: !!token};
+  })
+
   app.get('/me', { preHandler: withAuthentication }, async function (request, reply) {
     const token = request.session.get('token')
-
-    if (!token) {
-      return reply.redirect('/api/auth/login')
-    }
+    request.log.info(token)
 
     const profile = await request.userinfo(token.spotifyToken.access_token)
 

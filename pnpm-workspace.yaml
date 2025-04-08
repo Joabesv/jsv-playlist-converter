@@ -41,5 +41,11 @@ catalog:
   pino-pretty: ^7.0.0
   zod-to-json-schema: ^3.24.5
   ofetch: ^1.4.1
+  pinia: ^3.0.1
+  '@tanstack/vue-query': ^5.72.0
+  '@tanstack/vue-query-devtools': ^5.72.0
+  '@kitbag/router': ^0.20.0
+  vue-router: '4.5.0'
+
 onlyBuiltDependencies:
   - esbuild
